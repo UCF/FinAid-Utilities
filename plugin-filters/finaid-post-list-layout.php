@@ -21,7 +21,7 @@ function ucf_post_list_display_grouped_before( $content, $posts, $atts ) {
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_post_list_display_grouped_before', array( __NAMESPACE__ . "\ucf_post_list_display_grouped_before" ), 10, 3 );
+add_filter( 'ucf_post_list_display_grouped_before', __NAMESPACE__ . "\ucf_post_list_display_grouped_before", 10, 3 );
 
 /**
  * Function for displaying the title of the grouped post list
@@ -54,35 +54,47 @@ add_filter( 'ucf_post_list_display_grouped_title', __NAMESPACE__ . '\ucf_post_li
  * @return string
  */
 function ucf_post_list_display_grouped( $content, $posts, $atts ) {
+	if ( ! is_array( $posts ) && $posts !== false ) {
+		$posts = array( $posts );
+	}
+
 	$group_by_subterm = false;
 
 	if ( isset( $atts['group_by_subterm'] ) ) {
 		$group_by_subterm = true;
 	}
 
+	$post_count = count( $posts );
+
 	// If we're grouping by subterm, go ahead and do it
 	list($grouped, $posts) = $group_by_subterm ? ucf_post_list_grouped_groupby_subterm( $posts, $atts ) : array(false, $posts);
 
 	ob_start();
 
-	if ( $grouped ) :
-		foreach( $posts as $term ) :
+	if ( $posts && $post_count > 0 ) :
+		if ( $grouped ) :
+			foreach( $posts as $term ) :
 ?>
-	<h2 class="heading-underline"><?php echo $term['term_name']; ?></h2>
-	<ul class="mb-2 list-unstyled">
-		<?php foreach( $term['posts'] as $post ) : ?>
-			<li><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a></li>
-		<?php endforeach; // End foreach post ?>
-	</ul>
-		<?php endforeach; // End foreach term ?>
+			<h2 class="heading-underline"><?php echo $term['term_name']; ?></h2>
+			<ul class="mb-2 list-unstyled">
+				<?php foreach( $term['posts'] as $post ) : ?>
+					<li><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a></li>
+				<?php endforeach; // End foreach post ?>
+			</ul>
+				<?php endforeach; // End foreach term ?>
 <?php
-	else:
+		else:
 ?>
-	<ul class="list-unstyled">
-	<?php foreach ( $posts as $post ) : ?>
-		<li><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a></li>
-	<?php endforeach; ?>
-	</ul>
+		<ul class="list-unstyled">
+		<?php foreach ( $posts as $post ) : ?>
+			<li><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+<?php
+		endif;
+	else : // Post count is 0
+?>
+		<p>No results found.</p>
 <?php
 	endif;
 	return ob_get_clean();
