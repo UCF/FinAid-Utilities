@@ -1,11 +1,11 @@
 <?php
 /**
- * Provides post list layouts for media
+ * Provides post list layouts for grouped
  */
 namespace FinAid\Utils\Plugins;
 
 /**
- * Function for displaying the beginning of a media post list
+ * Function for displaying the beginning of a grouped post list
  * @author Jim Barnes
  * @since 1.0.0
  * @param string $content The content passed to the filter
@@ -13,18 +13,18 @@ namespace FinAid\Utils\Plugins;
  * @param array $atts The shortcode arguments
  * @return string
  */
-function ucf_post_list_display_media_before( $content, $posts, $atts ) {
+function ucf_post_list_display_grouped_before( $content, $posts, $atts ) {
 	ob_start();
 ?>
-	<div class="ucf-post-list ucf-post-list-media" id="post-list-<?php echo $atts['list_id']; ?>">
+	<div class="ucf-post-list ucf-post-list-grouped" id="post-list-<?php echo $atts['list_id']; ?>">
 <?php
 	return ob_get_clean();
 }
 
-// add_filter( 'ucf_post_list_display_media_before', array( __NAMESPACE__ . "\ucf_post_list_display_media_before" ), 10, 3 );
+add_filter( 'ucf_post_list_display_grouped_before', array( __NAMESPACE__ . "\ucf_post_list_display_grouped_before" ), 10, 3 );
 
 /**
- * Function for displaying the title of the media post list
+ * Function for displaying the title of the grouped post list
  * @author Jim Barnes
  * @since 1.0.0
  * @param string $content The content passed to the filter
@@ -32,7 +32,7 @@ function ucf_post_list_display_media_before( $content, $posts, $atts ) {
  * @param array $atts The shortcode arguments
  * @return string
  */
-function ucf_post_list_display_media_title( $content, $posts, $atts ) {
+function ucf_post_list_display_grouped_title( $content, $posts, $atts ) {
 	$formatted_title = '';
 
 	if ( $list_title = $atts['list_title'] ) {
@@ -42,10 +42,10 @@ function ucf_post_list_display_media_title( $content, $posts, $atts ) {
 	return $formatted_title;
 }
 
-add_filter( 'ucf_post_list_display_media_title', __NAMESPACE__ . '\ucf_post_list_display_media_title', 10, 3 );
+add_filter( 'ucf_post_list_display_grouped_title', __NAMESPACE__ . '\ucf_post_list_display_grouped_title', 10, 3 );
 
 /**
- * Function for displaying the items of the media post list
+ * Function for displaying the items of the grouped post list
  * @author Jim Barnes
  * @since 1.0.0
  * @param string $content The content passed to the filter
@@ -53,7 +53,7 @@ add_filter( 'ucf_post_list_display_media_title', __NAMESPACE__ . '\ucf_post_list
  * @param array $atts The shortcode arguments
  * @return string
  */
-function ucf_post_list_display_media( $content, $posts, $atts ) {
+function ucf_post_list_display_grouped( $content, $posts, $atts ) {
 	$group_by_subterm = false;
 
 	if ( isset( $atts['group_by_subterm'] ) ) {
@@ -61,7 +61,7 @@ function ucf_post_list_display_media( $content, $posts, $atts ) {
 	}
 
 	// If we're grouping by subterm, go ahead and do it
-	list($grouped, $posts) = $group_by_subterm ? ucf_post_list_media_groupby_subterm( $posts, $atts ) : array(false, $posts);
+	list($grouped, $posts) = $group_by_subterm ? ucf_post_list_grouped_groupby_subterm( $posts, $atts ) : array(false, $posts);
 
 	ob_start();
 
@@ -88,10 +88,10 @@ function ucf_post_list_display_media( $content, $posts, $atts ) {
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_post_list_display_media', __NAMESPACE__ . '\ucf_post_list_display_media', 10, 3 );
+add_filter( 'ucf_post_list_display_grouped', __NAMESPACE__ . '\ucf_post_list_display_grouped', 10, 3 );
 
 /**
- * Function for displaying the end of the media post list
+ * Function for displaying the end of the grouped post list
  * @author Jim Barnes
  * @since 1.0.0
  * @param string $content The content passed to the filter
@@ -99,7 +99,7 @@ add_filter( 'ucf_post_list_display_media', __NAMESPACE__ . '\ucf_post_list_displ
  * @param array $atts The shortcode arguments
  * @return string
  */
-function ucf_post_list_display_media_after( $content, $posts, $atts ) {
+function ucf_post_list_display_grouped_after( $content, $posts, $atts ) {
 	ob_start();
 ?>
 	</div>
@@ -107,28 +107,28 @@ function ucf_post_list_display_media_after( $content, $posts, $atts ) {
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_post_list_display_media_after', __NAMESPACE__ . '\ucf_post_list_display_media_after', 10, 3 );
+add_filter( 'ucf_post_list_display_grouped_after', __NAMESPACE__ . '\ucf_post_list_display_grouped_after', 10, 3 );
 
 /**
- * Adds the media layout to the layout array
+ * Adds the grouped layout to the layout array
  * @author Jim Barnes
  * @since 1.0.0
  * @param array $layouts The layout array
  * @return array
  */
-function ucf_post_list_add_media_layout( $layouts ) {
-	if ( ! isset( $layouts['media'] ) ) {
-		$layouts[] = 'media';
+function ucf_post_list_add_grouped_layout( $layouts ) {
+	if ( ! isset( $layouts['grouped'] ) ) {
+		$layouts[] = 'grouped';
 	}
 
 	return $layouts;
 }
 
-add_filter( 'ucf_post_list_get_layouts', __NAMESPACE__ . '\ucf_post_list_add_media_layout', 10, 1 );
+add_filter( 'ucf_post_list_get_layouts', __NAMESPACE__ . '\ucf_post_list_add_grouped_layout', 10, 1 );
 
 /**
  * Filter for adding custom shortcode atts
- * for the media layout
+ * for the grouped layout
  * @author Jim Barnes
  * @since 1.0.0
  * @param array $sc_atts The default shortcode atts
@@ -136,9 +136,9 @@ add_filter( 'ucf_post_list_get_layouts', __NAMESPACE__ . '\ucf_post_list_add_med
  * @return array
  */
 function ucf_post_list_add_shortcode_atts( $sc_atts, $layout ) {
-	if ( $layout === 'media' ) {
+	if ( $layout === 'grouped' ) {
 		$sc_atts['group_by_subterm'] = false;
-		$sc_atts['group_by_subterm_tax'] = 'media';
+		$sc_atts['group_by_subterm_tax'] = 'grouped';
 		$sc_atts['group_by_subterm_term'] = '';
 	}
 
@@ -155,7 +155,7 @@ add_filter( 'ucf_post_list_get_sc_atts', __NAMESPACE__ . '\ucf_post_list_add_sho
  * @param array $atts The argument array
  * @return array
  */
-function ucf_post_list_media_groupby_subterm( $posts, $atts ) {
+function ucf_post_list_grouped_groupby_subterm( $posts, $atts ) {
 	$taxonomy = isset( $atts['group_by_subterm_tax'] ) ? $atts['group_by_subterm_tax'] : false;
 	$term     = isset( $atts['group_by_subterm_term'] ) ? $atts['group_by_subterm_term'] : false;
 
