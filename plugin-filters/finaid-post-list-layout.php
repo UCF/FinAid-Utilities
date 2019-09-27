@@ -76,7 +76,7 @@ function ucf_post_list_display_grouped( $content, $posts, $atts ) {
 			foreach( $posts as $term ) :
 ?>
 			<h2 class="heading-underline"><?php echo $term['term_name']; ?></h2>
-			<ul class="mb-2 list-unstyled">
+			<ul class="mb-4 list-unstyled">
 				<?php foreach( $term['posts'] as $post ) : ?>
 					<li><a href="<?php echo get_permalink( $post->ID ); ?>"><?php echo $post->post_title; ?></a></li>
 				<?php endforeach; // End foreach post ?>
