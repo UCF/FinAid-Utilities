@@ -193,7 +193,7 @@ function icon_list_before( $retval, $section, $class, $title, $section_id ) {
 	$output = ob_get_clean();
 
 	if ( $has_content ) {
-		$retval += $output;
+		$retval .= apply_filters( 'the_content', $section->post_content ) . $output;
 	} else {
 		$retval = $output;
 	}
@@ -265,7 +265,7 @@ function icon_list_after( $retval, $section ) {
 	$output = ob_get_clean();
 
 	if ( $has_content ) {
-		$retval += $output;
+		$retval .= $output;
 	} else {
 		$retval = $output;
 	}
