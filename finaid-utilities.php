@@ -13,3 +13,4 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once 'plugin-filters/post-list-layout.php';
+require_once 'plugin-filters/section-filters.php';
