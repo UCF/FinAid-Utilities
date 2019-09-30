@@ -20,9 +20,6 @@ define( 'FINAID_UTILS__STATIC_URL', FINAID_UTILS__PLUGIN_URL . '/static' );
 define( 'FINAID_UTILS__JS_URL', FINAID_UTILS__STATIC_URL . '/js' );
 
 
-// Admin files
-require_once FINAID_UTILS__PLUGIN_PATH . 'admin/admin.php';
-
 // Includes
 require_once FINAID_UTILS__PLUGIN_PATH . 'plugin-filters/finaid-post-list-layout.php';
 
