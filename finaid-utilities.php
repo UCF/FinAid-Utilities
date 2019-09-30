@@ -24,7 +24,7 @@ define( 'FINAID_UTILS__JS_URL', FINAID_UTILS__STATIC_URL . '/js' );
 require_once FINAID_UTILS__PLUGIN_PATH . 'admin/admin.php';
 
 // Includes
-// ...
+require_once FINAID_UTILS__PLUGIN_PATH . 'plugin-filters/finaid-post-list-layout.php';
 
 // Plugin-dependent files
 add_action( 'plugins_loaded', function() {
