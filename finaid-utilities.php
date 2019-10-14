@@ -12,4 +12,5 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-require_once 'plugin-filters/finaid-post-list-layout.php';
+require_once 'plugin-filters/post-list-layout.php';
+require_once 'plugin-filters/taxonomy-filters.php';
