@@ -6,9 +6,8 @@
 namespace FinAid\Utils\Plugins;
 
 function disable_taxonomy_archives() {
-	if ( is_category() || is_tag() || is_date() || is_author() ) {
-		global $wp_query;
-		$wp_query->set_404();
+	if ( is_category() || is_tag() ) {
+		wp_redirect( home_url() );
 	}
 }
 
