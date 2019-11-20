@@ -12,5 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-require_once 'plugin-filters/post-list-layout.php';
-require_once 'plugin-filters/taxonomy-filters.php';
+define( 'FINAID_UTILS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+require_once FINAID_UTILS__PLUGIN_DIR . 'plugin-filters/post-list-layout.php';
+require_once FINAID_UTILS__PLUGIN_DIR . 'plugin-filters/taxonomy-filters.php';
