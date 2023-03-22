@@ -1,8 +1,8 @@
 === FinAid Utilities ===
 Contributors: ucfwebcom
 Requires at least: 5.2.3
-Tested up to: 5.2.3
-Stable tag: 1.0.0
+Tested up to: 6.1
+Stable tag: 1.0.1
 Requires PHP: 7.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
@@ -21,6 +21,10 @@ Head over to the [FinAid Utilities wiki](https://github.com/UCF/FinAid-Utilities
 
 
 == Changelog ==
+
+= 1.0.1 =
+Enhancements:
+* Added composer file.
 
 = 1.0.0 =
 * Initial release

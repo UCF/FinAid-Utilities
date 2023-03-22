@@ -15,6 +15,10 @@ Head over to the [FinAid Utilities wiki](https://github.com/UCF/FinAid-Utilities
 
 ## Changelog ##
 
+### 1.0.1 ###
+Enhancements:
+* Added composer file.
+
 ### 1.0.0 ###
 * Initial release
 

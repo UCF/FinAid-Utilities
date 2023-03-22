@@ -1,0 +1,8 @@
+{
+    "name": "ucf/finaid-utilities",
+    "description": "Custom utilities and functionality for the Financial Aid WordPress site.",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
